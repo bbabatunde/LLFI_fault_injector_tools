@@ -1,0 +1,59 @@
+#!/usr/bin/python
+import re
+
+
+# process whole file
+def process_profile_info(file_name):
+    with open(file_name) as profile_file:
+        profile_file = profile_file.readlines()
+        for line in profile_file:
+            process_line(line)
+
+
+# process each line with bamboo index
+def process_line(str):
+    # thread index
+    match = re.search(r'--\sthreadIndex\s[0-9]*', str)
+    if match:
+        thread_index_info = match.group()
+        thread_index = re.findall(r'\b\d+\b', thread_index_info)
+        if thread_index:
+            thread_index = int(thread_index[0])
+        else:
+            thread_index = -1
+    # instCount
+    match = re.search(r'--\sinstCount\s[0-9]*', str)
+    if match:
+        instCount_info = match.group()
+        instCount = re.findall(r'\b\d+\b', instCount_info)
+        if instCount:
+            instCount = int(instCount[0])
+        else:
+            instCount = -1
+    # dynamicKernelIndex
+    match = re.search(r'--\sdynamicKernelIndex\s[0-9]*', str)
+    if match:
+        staticKernelIndex_info = match.group()
+        dynamicKernelIndex = re.findall(r'\b\d+\b', staticKernelIndex_info)
+        if dynamicKernelIndex:
+            dynamicKernelIndex = int(dynamicKernelIndex[0])
+        else:
+            dynamicKernelIndex = -1
+    # staticKernelIndex
+    match = re.search(r'--\sstaticKernelIndex\s[0-9]*', str)
+    if match:
+        staticKernelIndex_info = match.group()
+        staticKernelIndex = re.findall(r'\b\d+\b', staticKernelIndex_info)
+        if staticKernelIndex:
+            staticKernelIndex = int(staticKernelIndex[0])
+        else:
+            staticKernelIndex = -1
+
+# main
+def main():
+    file_name = "/home/baba/rodinia_3.1/cuda/gaussian/bamboo_fi/bamboo.profile.txt"
+    process_profile_info(file_name)
+
+
+if __name__ == "__main__":
+    main()
