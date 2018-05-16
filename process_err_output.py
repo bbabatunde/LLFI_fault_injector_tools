@@ -2,26 +2,23 @@
 import re
 import os
 
-
 def create_file_path(benchmark):
     suite_path = "/home/baba/rodinia_3.1/cuda/"
     std_out_directory = suite_path + benchmark + "/bamboo_fi/err_output/"
     process_std_out(std_out_directory)
-
 
 def process_std_out(std_out_directory):
     for std_out_file in sorted(os.listdir(std_out_directory)):
         std_out_file_index = int(std_out_file.split("-")[1])
         file_path = std_out_directory + std_out_file
         process_file(file_path)
-
+    return std_out_file_index
 
 def process_file(file_path):
     with open(file_path) as std_out:
         std_out = std_out.readlines()
         for line in std_out:
             process_line(line)
-
 
 # process each line with bamboo index
 def process_line(str):
@@ -108,12 +105,12 @@ def process_line(str):
     # devicefiBit
     match = re.search(r'\sfiBit:\s[0-9]*\(.*?\)', str)
     if match:
-        fiBit_info = match.group()
-        fiBit = re.findall(r'\b\d+\b', fiBit_info)
-        if fiBit:
-            fiBit = int(fiBit[0])
+        devicefiBit_info = match.group()
+        devicefiBit= re.findall(r'\b\d+\b', devicefiBit_info)
+        if devicefiBit:
+            devicefiBit = int(devicefiBit[0])
         else:
-            fiBit = -1
+            devicefiBit = -1
 
     # Original Value
     match = re.search(r'\sOriginal\sValue:\s[0-9]*\s[\*\*]', str)
@@ -136,7 +133,6 @@ def process_line(str):
     else:
         corrupted_value = ""
 
-
     #Error Detected
     match = re.search(r'Error\sDetected:\s.*$', str)
     if match:
@@ -144,12 +140,15 @@ def process_line(str):
         error_detected =  re.findall(r'Error\sDetected:\s(.*)', error_detected_info)
         if error_detected:
             error_detected = ''.join(error_detected)
-            print error_detected
         else:
             error_detected = ""
 
-def database_insert(thread_index, instCount, dynamicKernelIndex, staticKernelIndex):
-    print "hey"
+    return error_detected, corrupted_value,\
+           original_value, fiInstCount, \
+           fi_thread_index, fiBambooIndex, \
+           fiBit, fiDynamicKernelIndex,\
+           deviceFiInstCount, deviceFiThreadIndex, \
+           devicefiBit
 
 # main
 def main():

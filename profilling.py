@@ -1,17 +1,16 @@
 #!/usr/bin/python
 import re
 
-
 # process whole file
-def process_profile_info(file_name):
+def process_profile_info(c, conn, file_name):
     with open(file_name) as profile_file:
         profile_file = profile_file.readlines()
-        for line in profile_file:
-            process_line(line)
-
+        for line_no, line in enumerate(profile_file):
+            process_line(c, conn, line_no, line)
+    return c, conn
 
 # process each line with bamboo index
-def process_line(str):
+def process_line(c, conn, line_no, str):
     # thread index
     match = re.search(r'--\sthreadIndex\s[0-9]*', str)
     if match:
@@ -49,11 +48,17 @@ def process_line(str):
         else:
             staticKernelIndex = -1
 
+    c.execute('INSERT OR IGNORE INTO Profiling ' \
+              'VALUES (%d, %d, %d, %d,%d);'
+              % (line_no, thread_index, instCount, dynamicKernelIndex, staticKernelIndex))
+    conn.commit()
+    return c, conn
+
 # main
-def main():
-    file_name = "/home/baba/rodinia_3.1/cuda/gaussian/bamboo_fi/bamboo.profile.txt"
-    process_profile_info(file_name)
+def profiling_main(c,conn, benchmark):
+    file_name = "/home/baba/rodinia_3.1/cuda/" + benchmark + "/bamboo_fi/bamboo.profile.txt"
+    c, conn = process_profile_info(c,conn, file_name)
+    return c, conn
 
 
-if __name__ == "__main__":
-    main()
+

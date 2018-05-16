@@ -1,4 +1,5 @@
 import sqlite3
+from profilling import profiling_main
 
 
 # initialize database
@@ -20,14 +21,18 @@ def initDB(db_name):
               'CorruptedValue TEXT)')
 
     c.execute('CREATE TABLE IF NOT EXISTS ' \
-              'BenchProfile (ID INTEGER PRIMARY KEY,ThreadIndex INTEGER, ' \
+              'Profiling (ID INTEGER PRIMARY KEY,ThreadIndex INTEGER, ' \
               'InstructionCount INTEGER,DynamicKernelIndex INTEGER, ' \
               'StaticKernelIndex INTEGER)')
 
     return c, conn;
 
+
 # main
 def main():
-        benchmark_name = raw_input("Enter benchmark pathname:")
-        c, conn = initDB(benchmark_name)
-        
+    benchmark_name = raw_input("Enter benchmark pathname:")
+    c, conn = initDB(benchmark_name)
+    profiling_main(c, conn, benchmark_name)
+
+if __name__ == "__main__":
+    main()
