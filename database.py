@@ -1,5 +1,8 @@
 import sqlite3
 from profilling import profiling_main
+from process_err_output import err_out_main
+from process_llvmir import llvm_main
+from process_std_output import std_out_main
 
 
 # initialize database
@@ -12,19 +15,31 @@ def initDB(db_name):
     c = conn.cursor()
 
     c.execute('CREATE TABLE IF NOT EXISTS ' \
-              'Injection  (ID INTEGER PRIMARY KEY, ' \
-              'ConfigThreadIndex INTEGER,ConfigInstCount INTEGER,' \
-              'DynKernelIndex INTEGER, StaticKernelIndex INTEGER, ' \
-              'SeedFactor REAL,ErrorDetected TEXT, FiBit INTEGER,' \
-              'FiBambooIndex INTEGER,Type TEXT, RuntimeThreadIndex INTEGER, ' \
+              'ErrorOutput (ID INTEGER PRIMARY KEY, ' \
+              'FiThreadIndex INTEGER,FiInstCount INTEGER,' \
+              'FiDynKernelIndex INTEGER, FiStaticKernelIndex INTEGER, ' \
+              'FiBit INTEGER,' \
+              'FiBambooIndex INTEGER, RuntimeThreadIndex INTEGER, ' \
+              'RuntimeInstCount INTEGER, RuntimeFiBit INTEGER, OriginalValue TEXT, ' \
+              'CorruptedValue TEXT,ErrorDetected TEXT)')
+
+    c.execute('CREATE TABLE IF NOT EXISTS ' \
+              'StdOutput (ID INTEGER PRIMARY KEY, ' \
+              'FiThreadIndex INTEGER,FiInstCount INTEGER,' \
+              'FiDynKernelIndex INTEGER, FiStaticKernelIndex INTEGER, ' \
+              'FiBit INTEGER,' \
+              'FiBambooIndex INTEGER, RuntimeThreadIndex INTEGER, ' \
               'RuntimeInstCount INTEGER, RuntimeFiBit INTEGER, OriginalValue TEXT, ' \
               'CorruptedValue TEXT)')
 
     c.execute('CREATE TABLE IF NOT EXISTS ' \
-              'Profiling (ID INTEGER PRIMARY KEY,ThreadIndex INTEGER, ' \
+              'profiling (ID INTEGER PRIMARY KEY,ThreadIndex INTEGER, ' \
               'InstructionCount INTEGER,DynamicKernelIndex INTEGER, ' \
               'StaticKernelIndex INTEGER)')
 
+    c.execute('CREATE TABLE IF NOT EXISTS ' \
+              'LlvmOutput (ID INTEGER PRIMARY KEY,BambooIndex INTEGER, ' \
+              'KernelId INTEGER,KernelLine INTEGER)')
     return c, conn;
 
 
@@ -32,7 +47,11 @@ def initDB(db_name):
 def main():
     benchmark_name = raw_input("Enter benchmark pathname:")
     c, conn = initDB(benchmark_name)
-    profiling_main(c, conn, benchmark_name)
+    # c, conn = profiling_main(c, conn, benchmark_name)
+    #c, conn = err_out_main(c, conn, benchmark_name)
+    #c, conn = llvm_main(c, conn, benchmark_name)
+    c, conn = std_out_main(c, conn, benchmark_name)
+
 
 if __name__ == "__main__":
     main()
