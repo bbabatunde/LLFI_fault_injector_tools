@@ -3,6 +3,7 @@ from profilling import profiling_main
 from process_err_output import err_out_main
 from process_llvmir import llvm_main
 from process_std_output import std_out_main
+from process_prog_out import prog_out_main
 
 
 # initialize database
@@ -40,32 +41,39 @@ def initDB(db_name):
     c.execute('CREATE TABLE IF NOT EXISTS ' \
               'LlvmOutput (ID INTEGER PRIMARY KEY,BambooIndex INTEGER, ' \
               'KernelId INTEGER,KernelLine INTEGER)')
+
+    c.execute('CREATE TABLE IF NOT EXISTS ' \
+              'ProgOut (ID INTEGER PRIMARY KEY,fileIndex INTEGER, ' \
+              'FileCmp BOOLEAN NOT NULL CHECK (FileCmp IN (0,1)))')
+
     return c, conn;
 
 
 # main
 def main():
-
     benchmark_name = raw_input("Enter benchmark pathname:")
     process = raw_input("Enter process type:").lower()
 
     c, conn = initDB(benchmark_name)
 
-    if(process == "a"):
+    if (process == "a"):
         c, conn = profiling_main(c, conn, benchmark_name)
         c, conn = err_out_main(c, conn, benchmark_name)
         c, conn = llvm_main(c, conn, benchmark_name)
         c, conn = std_out_main(c, conn, benchmark_name)
-    elif(process == "p"):
+    elif (process == "p"):
         c, conn = profiling_main(c, conn, benchmark_name)
-    elif(process == "e"):
+    elif (process == "e"):
         c, conn = err_out_main(c, conn, benchmark_name)
-    elif(process == "l"):
+    elif (process == "l"):
         c, conn = llvm_main(c, conn, benchmark_name)
-    elif(process == "s"):
+    elif (process == "s"):
         c, conn = std_out_main(c, conn, benchmark_name)
+    elif (process == "pr"):
+        c, conn = prog_out_main(c, conn, benchmark_name)
     else:
         print "Wrong Input"
+
 
 if __name__ == "__main__":
     main()
