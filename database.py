@@ -45,13 +45,27 @@ def initDB(db_name):
 
 # main
 def main():
-    benchmark_name = raw_input("Enter benchmark pathname:")
-    c, conn = initDB(benchmark_name)
-    # c, conn = profiling_main(c, conn, benchmark_name)
-    #c, conn = err_out_main(c, conn, benchmark_name)
-    #c, conn = llvm_main(c, conn, benchmark_name)
-    c, conn = std_out_main(c, conn, benchmark_name)
 
+    benchmark_name = raw_input("Enter benchmark pathname:")
+    process = raw_input("Enter process type:").lower()
+
+    c, conn = initDB(benchmark_name)
+
+    if(process == "a"):
+        c, conn = profiling_main(c, conn, benchmark_name)
+        c, conn = err_out_main(c, conn, benchmark_name)
+        c, conn = llvm_main(c, conn, benchmark_name)
+        c, conn = std_out_main(c, conn, benchmark_name)
+    elif(process == "p"):
+        c, conn = profiling_main(c, conn, benchmark_name)
+    elif(process == "e"):
+        c, conn = err_out_main(c, conn, benchmark_name)
+    elif(process == "l"):
+        c, conn = llvm_main(c, conn, benchmark_name)
+    elif(process == "s"):
+        c, conn = std_out_main(c, conn, benchmark_name)
+    else:
+        print "Wrong Input"
 
 if __name__ == "__main__":
     main()
