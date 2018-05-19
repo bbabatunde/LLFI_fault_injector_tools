@@ -2,14 +2,16 @@
 import re
 import os
 
-#creates bamboo output filepath
+
+# creates bamboo output filepath
 def create_file_path(c, conn, benchmark):
     suite_path = "/home/baba/rodinia_3.1/cuda/"
     err_out_directory = suite_path + benchmark + "/bamboo_fi/err_output/"
     c, conn = process_err_out(c, conn, err_out_directory)
     return c, conn
 
-#process each file
+
+# process each file
 def process_err_out(c, conn, err_out_directory):
     for err_out_file in sorted(os.listdir(err_out_directory)):
         err_out_file_index = int(err_out_file.split("-")[1])
@@ -117,7 +119,7 @@ def process_err_out(c, conn, err_out_directory):
                   'VALUES (%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,\'%s\',\'%s\',\'%s\');'
                   % (err_out_file_index, fi_thread_index, fiInstCount, fiDynamicKernelIndex,
                      fiStaticKernelIndex, fiBit, fiBambooIndex, deviceFiThreadIndex, deviceFiInstCount,
-                     devicefiBit, original_value, corrupted_value,error_detected
+                     devicefiBit, original_value, corrupted_value, error_detected
                      ))
         conn.commit()
     return c, conn
