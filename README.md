@@ -6,7 +6,7 @@ This script initiate the database and calls the other scripts depending on the p
 
 **run** python database.py
 
-Enter benchmark pathname: e.g gaussian
+Enter benchmark name: e.g gaussian
 
 Enter process type: e.g a
 
