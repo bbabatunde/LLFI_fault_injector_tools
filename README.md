@@ -55,6 +55,7 @@ Change **suite_path = "/home/baba/rodinia_3.1/cuda/"** in **create_file_path**  
 
 ## profilling.py
 Processes the bamboo.profile.txt file
+
 **Modification** 
 
  Change **file_path = "/home/baba/rodinia_3.1/cuda/" + benchmark + "/bamboo_fi/bamboo.profile.txt"** in profilling_main funtion to your file path
