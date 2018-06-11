@@ -36,7 +36,7 @@ Process the LLVM IR file in /bamboo_fi after adding debug info to the llvm file 
 
 **Modification** 
 
- Change file_path = "/home/baba/rodinia_3.1/cuda/" +benchmark+ "/bamboo_fi/" +benchmark+ "_injection.ll.ll" in llvm_main funtion to your file path
+ Change **file_path = "/home/baba/rodinia_3.1/cuda/" +benchmark+ "/bamboo_fi/" +benchmark+ "_injection.ll.ll"** in llvm_main funtion to your file path
 
 ## process_prog_out.py
 
