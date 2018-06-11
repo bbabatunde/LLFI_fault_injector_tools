@@ -51,6 +51,7 @@ create_file_path function requires changes to golden_outfile path and suite_path
 Processes files in /bamboo_fi/std_output 
 
 **Modification** 
+
 Change **suite_path = "/home/baba/rodinia_3.1/cuda/"** in **create_file_path**  function to your file path
 
 ## profilling.py
