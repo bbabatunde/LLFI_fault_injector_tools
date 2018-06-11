@@ -6,7 +6,7 @@ run python database.py
 
 Enter benchmark pathname: e.g gaussian
 
-Enter process type:
+Enter process type: e.g a
 
 process type
 
