@@ -39,10 +39,12 @@ Process the LLVM IR file in /bamboo_fi after adding debug info to the llvm file 
  Change **file_path = "/home/baba/rodinia_3.1/cuda/" +benchmark+ "/bamboo_fi/" +benchmark+ "_injection.ll.ll"** in llvm_main funtion to your file path
 
 ## process_prog_out.py
-Compares the golden output with the program output files in /bamboo_fi/prog_output
+Compares the golden output with the program output files in /bamboo_fi/prog_output. Store comparasion results as either 1's for true and 0's for false
 
 **Modification** 
+
 create_file_path function requires changes to golden_outfile path and suite_path
+
  
 ## process_std_output.py
 
