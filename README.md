@@ -1,5 +1,5 @@
 # LLFI_fault_injector_tools
-Utilized regular expression to parse LLFI output files
+Utilized regular expressions to parse LLFI output files
 
 # database.py
 
