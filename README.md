@@ -2,6 +2,8 @@
 
 # Database.py
 
+This script initiate the database and calls the other scripts depending on the process type
+
 run python database.py
 
 Enter benchmark pathname: e.g gaussian
@@ -15,7 +17,7 @@ process type
 - e: process and create database for error output
 - l: process and create database for LLVM IR file
 - s: process and create database for standard output folder
-- pr: process and create database for program pout output folder
+- pr: process and create database for program output folder
 
 
 # Process_error_output.py
