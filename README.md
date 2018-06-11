@@ -9,9 +9,13 @@ Enter benchmark pathname: e.g gaussian
 Enter process type:
 
 process type
-1. a: process and create database for all LLFI output
-2. p: process and create database for profilling output
-3. 
+
+- a: process and create database for all LLFI output
+- p: process and create database for profilling file
+- e: process and create database for error output
+- l: process and create database for LLVM IR file
+- s: process and create database for standard output folder
+- pr: process and create database for program pout output folder
 
 
 # Process_error_output.py
