@@ -56,8 +56,8 @@ def process_line(c, conn, line_no, str):
 
 # main
 def profiling_main(c,conn, benchmark):
-    file_name = "/home/baba/rodinia_3.1/cuda/" + benchmark + "/bamboo_fi/bamboo.profile.txt"
-    c, conn = process_profile_info(c,conn, file_name)
+    file_path = "/home/baba/rodinia_3.1/cuda/" + benchmark + "/bamboo_fi/bamboo.profile.txt"
+    c, conn = process_profile_info(c,conn, file_path)
     return c, conn
 
 
