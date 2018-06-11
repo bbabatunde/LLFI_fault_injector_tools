@@ -1,6 +1,6 @@
 # LLFI_fault_injector_tools
 
-# Database.py
+# database.py
 
 This script initiate the database and calls the other scripts depending on the process type
 
@@ -12,17 +12,31 @@ Enter process type: e.g a
 
 process type
 
-- a: process and create database for all LLFI output
-- p: process and create database for profilling file
-- e: process and create database for error output
-- l: process and create database for LLVM IR file
-- s: process and create database for standard output folder
-- pr: process and create database for program output folder
+- a: processes and create database for all LLFI output
+- p: processes and create database for profilling file
+- e: processes and create database for error output
+- l: processes and create database for LLVM IR file
+- s: processes and create database for standard output folder
+- pr: processes and create database for program output folder
 
 
-# Process_error_output.py
+# process_error_output.py
+
+Processes files in /bamboo_fi/err_output
+
+**Modification** 
+
+Change **suite_path = "/home/baba/rodinia_3.1/cuda/"** in **create_file_path**  function to your file path
+
+May require more changes in **create_file_path** function if not using rodinia benchmark suite
 
 ## process_llvmir.py
+
+Process the LLVM IR file in /bamboo_fi after adding debug info to the llvm file using llvm-dis -show-annotation **llvm file name**
+
+**Modification** 
+
+ Change file_path = "/home/baba/rodinia_3.1/cuda/" +benchmark+ "/bamboo_fi/" +benchmark+ "_injection.ll.ll" in llvm_main funtion to your file path
 
 ## process_prog_out.py
 
