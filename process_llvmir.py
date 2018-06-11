@@ -52,7 +52,7 @@ def process_bamboo_line(c, conn, index, kernel_id, str):
 
 # main
 def llvm_main(c, conn, benchmark):
-    file_name = "/home/baba/rodinia_3.1/cuda/" +benchmark+ "/bamboo_fi/" +benchmark+ "_injection.ll.ll"
-    c, conn = process_reg(c, conn, file_name)
+    file_path = "/home/baba/rodinia_3.1/cuda/" +benchmark+ "/bamboo_fi/" +benchmark+ "_injection.ll.ll"
+    c, conn = process_reg(c, conn, file_path)
     return c, conn
 
