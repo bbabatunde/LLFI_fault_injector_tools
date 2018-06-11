@@ -51,7 +51,7 @@ def initDB(db_name):
 
 # main
 def main():
-    benchmark_name = raw_input("Enter benchmark pathname:")
+    benchmark_name = raw_input("Enter benchmark name:")
     process = raw_input("Enter process type:").lower()
 
     c, conn = initDB(benchmark_name)
