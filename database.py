@@ -61,6 +61,7 @@ def main():
         c, conn = err_out_main(c, conn, benchmark_name)
         c, conn = llvm_main(c, conn, benchmark_name)
         c, conn = std_out_main(c, conn, benchmark_name)
+	c, conn = prog_out_main(c, conn, benchmark_name)
     elif (process == "p"):
         c, conn = profiling_main(c, conn, benchmark_name)
     elif (process == "e"):

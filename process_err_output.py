@@ -17,7 +17,7 @@ def process_err_out(c, conn, err_out_directory):
         err_out_file_index = int(err_out_file.split("-")[1])
         file_path = err_out_directory + err_out_file
         with open(file_path) as std_out:
-            err_out = err_out.readlines()
+            err_out = std_out.readlines()
             for str in err_out:
                 # fiThreadIndex
                 match = re.search(r'--\sfiThreadIndex:\s[0-9]*', str)
