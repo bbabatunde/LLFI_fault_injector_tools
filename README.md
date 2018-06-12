@@ -33,14 +33,14 @@ May require more changes in **create_file_path** function if not using rodinia b
 
 ## process_llvmir.py
 
-Process the LLVM IR file in /bamboo_fi after adding debug info to the llvm file using llvm-dis -show-annotation **llvm file name**
+Process the LLVM IR file in /bamboo_fi after adding debug info to the LLVM file using llvm-dis -show-annotation **LLVM IR file name**
 
 **Modification** 
 
  Change **file_path = "/home/baba/rodinia_3.1/cuda/" +benchmark+ "/bamboo_fi/" +benchmark+ "_injection.ll.ll"** in llvm_main funtion to your file path
 
 ## process_prog_out.py
-Compares the golden output with the program output files in /bamboo_fi/prog_output. Store comparasion results as either 1's for true and 0's for false
+Compares the golden output with the program output files in /bamboo_fi/prog_output. Store comparison results as either 1's for true and 0's for false
 
 **Modification** 
 
